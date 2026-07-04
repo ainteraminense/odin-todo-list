@@ -1,6 +1,10 @@
 import "./styles.css"
+import { TodoItem } from "./todo-item.js"
+import { Project } from "./project.js"
 
-const body = document.querySelector("body");
-body.textContent = "Hello World";
+let project = new Project();
+let toDo = new TodoItem("Laundry", "Wash Clothes", new Date(2026, 3, 8), "Low");
 
-console.log("hello world");
+project.toDos = toDo;
+console.log(project.name);
+console.log(project.toDos);
