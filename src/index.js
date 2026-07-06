@@ -1,10 +1,24 @@
 import "./styles.css"
-import { TodoItem } from "./todo-item.js"
-import { Project } from "./project.js"
+import { createToDoItem } from "./todo-item.js"
+import { createProject } from "./project.js"
+import { allProjects } from "./allProjects.js"
+ 
+// Testing
+const projects = allProjects();
 
-let project = new Project();
-let toDo = new TodoItem("Laundry", "Wash Clothes", new Date(2026, 3, 8), "Low");
+const defaultProject = createProject();
+const secondProject = createProject("My second project");
 
-project.toDos = toDo;
-console.log(project.name);
-console.log(project.toDos);
+projects.addProject(defaultProject);
+projects.addProject(secondProject);
+
+const toDo1 = createToDoItem("Laundry", "Wash Clothes", new Date(2026, 10, 3), "High");
+
+defaultProject.addToDo(toDo1);
+
+console.log(projects.getAllProjects());
+projects.getAllProjects().forEach(project => {
+    console.log(project.getToDos());
+});
+
+

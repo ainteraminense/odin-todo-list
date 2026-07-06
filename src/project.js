@@ -1,14 +1,14 @@
-export class Project {
-    constructor(name = "My Project") {
-        this.name = name;
-        this.toDoList = [];
+export function createProject(name = "My Project") {
+    const id = self.crypto.randomUUID();
+    const toDoList = [];
+
+    const getToDos = () => {
+        return toDoList;
     }
 
-    get toDos() {
-        return this.toDoList;
+    const addToDo= (toDo) => {
+        toDoList.push(toDo);
     }
 
-    set toDos(toDo) {
-        this.toDoList.push(toDo);
-    }
+    return { name, getToDos, addToDo }
 }

@@ -1,10 +1,11 @@
-export class TodoItem {
-    constructor(title, description, dueDate, priority, notes = "", isDone = false) {
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.priority = priority;
-        this.notes = notes;
-        this.isDone = isDone;
-    }
+export function createToDoItem(title, description, dueDate, priority, notes = "") {
+    
+    const id = self.crypto.randomUUID();
+    //const getID = () => id;
+
+    let isDone = false;
+    const getStatus = () => isDone;
+    const changeStatus = () => isDone = isDone === false ? true : false; 
+
+    return { title, description, dueDate, priority, getStatus, changeStatus }
 }
