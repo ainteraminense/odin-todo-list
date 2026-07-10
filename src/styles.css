@@ -1,6 +1,21 @@
 body {
     font-family: 'Courier New', Courier, monospace;
-    font-size: larger;
-    color: #2e7d0a;
-    font-weight: bolder;
+    background-color: #ffe4c4;
+}
+
+#main {
+    background-color: #faebd7;
+    width: 80vw;
+    margin: 0 auto;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 7fr 1fr;
+}
+
+.container h1,
+.container > button {
+    padding: 16px;
+    margin: 16px;
 }
