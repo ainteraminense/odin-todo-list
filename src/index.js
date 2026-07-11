@@ -1,5 +1,5 @@
-import "./styles.css"
-import { home } from "./home.js"
+import "./styles.css";
+import { home } from "./homePage.js";
  
 // Build the initial page
 home();

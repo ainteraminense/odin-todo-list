@@ -1,16 +1,20 @@
-import { allProjects } from "./allProjects.js"
+import { allProjects } from "./allProjects.js";
+import { OpenCreateNewProjPage } from "./createProjPage.js";
 
 export function home() {
     // Getting top part of page
     const main = document.querySelector("#main");
     const h1 = document.createElement("h1");
     h1.textContent = "View All Projects";
-    const addBtn = document.createElement("button");
+    const addProjBtn = document.createElement("button");
+    addProjBtn.setAttribute("command", "show-modal");
+    addProjBtn.setAttribute("commandfor", "my-dialog");
+    addProjBtn.addEventListener("click", OpenCreateNewProjPage);
     const projContainer = document.createElement("div");
     projContainer.classList.add("container");
-    addBtn.textContent = "Create Project";
+    addProjBtn.textContent = "Create Project";
     projContainer.appendChild(h1);
-    projContainer.appendChild(addBtn);
+    projContainer.appendChild(addProjBtn);
     main.appendChild(projContainer);
 
     const table = document.createElement("table");
@@ -50,8 +54,4 @@ export function home() {
         //console.log(proj.name);
         main.appendChild(table);
     });
-
-    // projects.forEach((proj) => {
-    //     console.log(proj.name);
-    // });
 }
