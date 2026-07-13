@@ -36,6 +36,7 @@ export function OpenCreateNewProjPage(name) {
         console.log(newProj.name);
         projectsFactory.addProject(newProj);
         dialog.close();
+        window.location.reload();
         event.preventDefault();
     });
     form.appendChild(h2);
