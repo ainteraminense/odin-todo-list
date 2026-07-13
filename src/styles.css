@@ -19,3 +19,8 @@ body {
     padding: 16px;
     margin: 16px;
 }
+
+.container-child {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

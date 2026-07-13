@@ -1,8 +1,11 @@
 import "./styles.css";
-import { Home, RefreshProjects } from "./homePage.js";
+import { home } from "./homePage.js";
  
 // Build the initial page
-Home();
+const homePage = home();
+homePage.createHomePageTopSection(); 
+homePage.refreshProjects();
+homePage.showDetails();
 
 // Refresh projects when project is added
 

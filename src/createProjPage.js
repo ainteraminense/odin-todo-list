@@ -1,8 +1,8 @@
 import { createProject } from "./project.js";
 import { allProjects } from "./allProjects.js";
 
-export function OpenCreateNewProjPage(name) {
-    console.log("Open create new proj page");
+export function openCreateNewProj(name) {
+    console.log("Open create new project page");
     const dialog = document.createElement("dialog");
     dialog.setAttribute("id", "my-dialog");
     
