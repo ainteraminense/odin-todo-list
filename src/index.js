@@ -1,8 +1,12 @@
 import "./styles.css";
-import { home } from "./homePage.js";
+import { Home, RefreshProjects } from "./homePage.js";
  
 // Build the initial page
-home();
+Home();
+
+// Refresh projects when project is added
+
+
 
 
 

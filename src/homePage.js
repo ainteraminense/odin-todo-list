@@ -1,32 +1,41 @@
 import { allProjects } from "./allProjects.js";
 import { OpenCreateNewProjPage } from "./createProjPage.js";
 
-export function home() {
-    // Getting top part of page
-    const main = document.querySelector("#main");
-    const h1 = document.createElement("h1");
-    h1.textContent = "View All Projects";
-    const addProjBtn = document.createElement("button");
-    addProjBtn.setAttribute("command", "show-modal");
-    addProjBtn.setAttribute("commandfor", "my-dialog");
-    addProjBtn.addEventListener("click", OpenCreateNewProjPage);
-    const projContainer = document.createElement("div");
-    projContainer.classList.add("container");
-    addProjBtn.textContent = "Create Project";
-    projContainer.appendChild(h1);
-    projContainer.appendChild(addProjBtn);
-    main.appendChild(projContainer);
-
-    const table = document.createElement("table");
-
+export function Home() {
+    CreateHomePageTopSeciton();
+    
+    // Initialize default proj
     const projectsFactory = allProjects();
     if(projectsFactory.getAllProjects() == null) {
         projectsFactory.initializeDefaultProj();
     }
     const projects = projectsFactory.getAllProjects();
-    // Initialize default proj
-    
-    projectsFactory.initializeDefaultProj();
+   
+    RefreshProjects(projects);
+}
+
+function CreateHomePageTopSeciton() {
+    // Getting top part of page
+    const main = document.querySelector("#main");
+    const h1 = document.createElement("h1");
+    h1.textContent = "View All Projects";
+    const addProjBtn = document.createElement("button");
+    addProjBtn.textContent = "Create Project";
+    addProjBtn.setAttribute("command", "show-modal");
+    addProjBtn.setAttribute("commandfor", "my-dialog");
+    addProjBtn.addEventListener("click", OpenCreateNewProjPage);
+
+    const projContainer = document.createElement("div");
+    projContainer.classList.add("container");
+
+    projContainer.appendChild(h1);
+    projContainer.appendChild(addProjBtn);
+    main.appendChild(projContainer);
+}
+
+export function RefreshProjects(projects) {
+    const table = document.createElement("table");
+    // Render the projects
     projects.forEach((proj) => {
         const thead = document.createElement("thead");
         const tr = document.createElement("tr");

@@ -35,8 +35,7 @@ export function OpenCreateNewProjPage(name) {
         const newProj = createProject(nameInput.value);
         console.log(newProj.name);
         projectsFactory.addProject(newProj);
-        //const projects = projectsFactory.getAllProjects();
-        //console.log(projects);
+        dialog.close();
         event.preventDefault();
     });
     form.appendChild(h2);
