@@ -1,4 +1,5 @@
 import { createProject } from "./project.js";
+import { allProjects } from "./allProjects.js";
 
 export function OpenCreateNewProjPage(name) {
     console.log("Open create new proj page");
@@ -28,8 +29,14 @@ export function OpenCreateNewProjPage(name) {
     const addBtn = document.createElement("button");
     const addBtnText = document.createTextNode("Add New Project");
     addBtn.appendChild(addBtnText);
+    const projectsFactory = allProjects();
     addBtn.addEventListener("click", (event) => {
         console.log("New project added");
+        const newProj = createProject(nameInput.value);
+        console.log(newProj.name);
+        projectsFactory.addProject(newProj);
+        //const projects = projectsFactory.getAllProjects();
+        //console.log(projects);
         event.preventDefault();
     });
     form.appendChild(h2);

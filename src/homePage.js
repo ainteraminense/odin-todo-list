@@ -20,8 +20,13 @@ export function home() {
     const table = document.createElement("table");
 
     const projectsFactory = allProjects();
-    const projects = projectsFactory.initializeDefaultProj();
-
+    if(projectsFactory.getAllProjects() == null) {
+        projectsFactory.initializeDefaultProj();
+    }
+    const projects = projectsFactory.getAllProjects();
+    // Initialize default proj
+    
+    projectsFactory.initializeDefaultProj();
     projects.forEach((proj) => {
         const thead = document.createElement("thead");
         const tr = document.createElement("tr");
