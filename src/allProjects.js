@@ -10,6 +10,7 @@ export function allProjects() {
 
     const initializeDefaultProj = () => {
         const defaultProj = createProject();
+        defaultProj.getActive() ? false : defaultProj.switchActive();
         addProject(defaultProj);
     };
 
@@ -18,8 +19,16 @@ export function allProjects() {
     }
 
     function getConvertedProjectsFromDB() {
-        const projects = JSON.parse(getProjectsFromDatabase());
-        return projects;
+        const convertedProjects = [];
+        for (let i = 0;i<localStorage.length;i++) {
+            let key = localStorage.key(i);
+            const unconvertedProjects = JSON.parse(localStorage.getItem(key));
+            unconvertedProjects.forEach(unconvertedProject => {
+                const convertedProject = createProject(unconvertedProject.name);
+                convertedProjects.push(convertedProject);
+            });
+        }
+        return convertedProjects;
     };
 
     function saveProjectToDatabase() {

@@ -8,6 +8,11 @@ export function createProject(name = "My Project") {
     const addToDo= (toDo) => {
         toDoList.push(toDo);
     }
+    const isActive = false;
 
-    return { name, getId, getToDos, addToDo }
+    const getActive = () => isActive;
+
+    const switchActive = () => isActive ? true : false;
+
+    return { name, getId, getToDos, addToDo, switchActive, getActive }
 }

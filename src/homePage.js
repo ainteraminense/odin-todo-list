@@ -3,6 +3,7 @@ import { openCreateNewProj } from "./createProjPage.js";
 import { openCreateNewToDo } from "./createToDoPage.js";
 
 export function home() {
+    const activeProject = null;
     const main = document.querySelector("#main");
     const containerChild = document.createElement("div");
     containerChild.classList.add("container-child");
@@ -13,6 +14,7 @@ export function home() {
         projectsFactory.initializeDefaultProj();
     }
     const projects = projectsFactory.getAllProjects();
+    //console.log(projects);
 
     const createHomePageTopSection = () => {
         // Getting top part of page
@@ -72,7 +74,13 @@ export function home() {
     }
 
     const showDetails = () => {
-        const tdName = projects[0];
+        // projects.forEach((proj) => {
+        //     if (proj.getActive()) {
+        //         activeProject = proj;
+        //         return;
+        //     }
+        // });
+        const tdName = activeProject;
         const asideTable = document.createElement("table");
         asideTable.classList.add("aside-table");
         const tableCaption = document.createElement("legend");
