@@ -1,20 +1,25 @@
 import { createProject } from "./project.js";
 
 export function allProjects() {
-    const projects = JSON.parse(getProjectsFromDatabase()) != null ? JSON.parse(getProjectsFromDatabase()) : [];
+    const projects = getProjectsFromDatabase() != null ? getConvertedProjectsFromDB() : [];
 
     const addProject = (project) => {
         projects.push(project);
         saveProjectToDatabase();
     };
 
-    const getAllProjects = () => {
-        return JSON.parse(getProjectsFromDatabase());
-    };
-
     const initializeDefaultProj = () => {
         const defaultProj = createProject();
         addProject(defaultProj);
+    };
+
+    const getAllProjects = () => {
+        return projects;
+    }
+
+    function getConvertedProjectsFromDB() {
+        const projects = JSON.parse(getProjectsFromDatabase());
+        return projects;
     };
 
     function saveProjectToDatabase() {
@@ -25,6 +30,6 @@ export function allProjects() {
         return localStorage.getItem("projects");
     };
 
-    return { addProject, getAllProjects, initializeDefaultProj }
+    return { addProject, getAllProjects, getConvertedProjectsFromDB, initializeDefaultProj }
 }
 

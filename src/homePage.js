@@ -72,7 +72,7 @@ export function home() {
     }
 
     const showDetails = () => {
-        const tdName = projects[0].name;
+        const tdName = projects[0];
         const asideTable = document.createElement("table");
         asideTable.classList.add("aside-table");
         const tableCaption = document.createElement("legend");
