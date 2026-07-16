@@ -1,13 +1,23 @@
 export function createProject(name = "My Project", isActive = true) {
-    const id = self.crypto.randomUUID();
+    const projectId = self.crypto.randomUUID();
     const toDoList = [];
 
-    const getId = () => id;
     const getToDos = () => toDoList;
 
-    const addToDo= (toDo) => {
+    const addToDo = (toDo) => {
         toDoList.push(toDo);
+        console.log("saving...");
+        console.log(toDoList);
+        saveToDoToDatabase();
+    } 
+
+    function saveToDoToDatabase() {
+        localStorage.setItem("todo", JSON.stringify(toDoList));
     }
 
-    return { name, isActive, getId, getToDos, addToDo}
+    function getToDoFromDB() {
+        return JSON.parse(localStorage.getItem("todo"));
+    }
+
+    return { projectId, name, isActive, getToDos, addToDo}
 }

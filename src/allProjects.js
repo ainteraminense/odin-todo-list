@@ -2,7 +2,7 @@ import { createProject } from "./project.js";
 
 export function allProjects() {
     const projects = getProjectsFromDatabase() ? getConvertedProjectsFromDB() : [];
-
+    
 
     const addProject = (project) => {
         projects.push(project);
@@ -24,7 +24,15 @@ export function allProjects() {
             if (projects[i].isActive === true) {
                 projects[i].isActive = false;
             }
-        }
+        };
+    };
+
+    const getCurrentProject = () => {
+        for (let i = 0; i < projects.length; i++) {
+            if (projects[i].isActive === true) {
+                return projects[i];
+            }
+        };
     };
 
     function getConvertedProjectsFromDB() {
@@ -33,7 +41,7 @@ export function allProjects() {
             let key = localStorage.key(i);
             const unconvertedProjects = JSON.parse(localStorage.getItem(key));
             unconvertedProjects.forEach(unconvertedProject => {
-                const convertedProject = createProject(unconvertedProject.name);
+                const convertedProject = createProject(unconvertedProject.name, unconvertedProject.isActive);
                 convertedProjects.push(convertedProject);
             });
         }
@@ -48,6 +56,6 @@ export function allProjects() {
         return localStorage.getItem("projects");
     };
 
-    return { addProject, initializeDefaultProj, getAllProjects, deActivateProjects }
+    return { addProject, initializeDefaultProj, getAllProjects, deActivateProjects,getCurrentProject }
 }
 

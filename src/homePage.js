@@ -3,7 +3,7 @@ import { openCreateNewProj } from "./createProjPage.js";
 import { openCreateNewToDo } from "./createToDoPage.js";
 
 export function home() {
-    const activeProject = null;
+    let activeProject = null;
     const main = document.querySelector("#main");
     const containerChild = document.createElement("div");
     containerChild.classList.add("container-child");
@@ -74,17 +74,12 @@ export function home() {
     }
 
     const showDetails = () => {
-        // projects.forEach((proj) => {
-        //     if (proj.getActive()) {
-        //         activeProject = proj;
-        //         return;
-        //     }
-        // });
+        activeProject = projectsFactory.getCurrentProject();
         const tdName = activeProject;
         const asideTable = document.createElement("table");
         asideTable.classList.add("aside-table");
         const tableCaption = document.createElement("legend");
-        const tableCaptionText = document.createTextNode(`All ToDos for ${projects[0].name}`);
+        const tableCaptionText = document.createTextNode(`All ToDos for ${activeProject.name}`);
         tableCaption.appendChild(tableCaptionText);
 
         const containerDetails = document.createElement("div");
@@ -94,6 +89,7 @@ export function home() {
         addToDoBtn.setAttribute("command", "show-modal");
         addToDoBtn.setAttribute("commandfor", "ToDo-dialog");
         addToDoBtn.addEventListener("click", openCreateNewToDo);
+        console.log(`ToDos are ${activeProject.getToDos()}`);
         // const tr = document.createElement("tr");
         // const thName = document.createElement("th");
         // thName.setAttribute("scope", "row");

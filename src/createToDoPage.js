@@ -1,3 +1,7 @@
+import { createProject } from "./project.js";
+import { allProjects } from "./allProjects.js";
+import { createToDoItem } from "./todo-item.js"
+
 export function openCreateNewToDo(name) {
     console.log("Open create new ToDo");
     const dialog = document.createElement("dialog");
@@ -24,24 +28,26 @@ export function openCreateNewToDo(name) {
     closeBtn.setAttribute("command", "close");
     const closeBtnText = document.createTextNode("Cancel");
     closeBtn.appendChild(closeBtnText);
-    // const addBtn = document.createElement("button");
-    // const addBtnText = document.createTextNode("Add New Project");
-    // addBtn.appendChild(addBtnText);
-    // const projectsFactory = allProjects();
-    // addBtn.addEventListener("click", (event) => {
-    //     console.log("New project added");
-    //     const newProj = createProject(nameInput.value);
-    //     console.log(newProj.name);
-    //     projectsFactory.addProject(newProj);
-    //     dialog.close();
-    //     window.location.reload();
-    //     event.preventDefault();
-    // });
+    const addBtn = document.createElement("button");
+    const addBtnText = document.createTextNode("Add New ToDo");
+    addBtn.appendChild(addBtnText);
+    const projectsFactory = allProjects();
+    const currentProject = projectsFactory.getCurrentProject();
+    //title, description, dueDate, priority
+    addBtn.addEventListener("click", (event) => {
+    const toDo = createToDoItem(titleInput.value, "", new Date(26, 5, 24), "low", currentProject.projectId);
+    console.log(toDo);
+    currentProject.addToDo(toDo);
+    console.log("New ToDo added");
+    dialog.close();
+    // window.location.reload();
+    event.preventDefault();
+    });
     form.appendChild(h2);
     form.appendChild(titleLabel);
     form.appendChild(titleInput);
-    // form.appendChild(closeBtn);
-    // form.appendChild(addBtn);
+    form.appendChild(closeBtn);
+    form.appendChild(addBtn);
     dialog.appendChild(form);
     dialog.appendChild(closeBtn);
 
