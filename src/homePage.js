@@ -14,7 +14,7 @@ export function home() {
         projectsFactory.initializeDefaultProj();
     }
     const projects = projectsFactory.getAllProjects();
-    //console.log(projects);
+    console.log(projects);
 
     const createHomePageTopSection = () => {
         // Getting top part of page

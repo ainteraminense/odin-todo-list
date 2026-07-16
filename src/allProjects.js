@@ -1,17 +1,17 @@
 import { createProject } from "./project.js";
 
 export function allProjects() {
-    const projects = getProjectsFromDatabase() != null ? getConvertedProjectsFromDB() : [];
+    const projects = getProjectsFromDatabase() ? getConvertedProjectsFromDB() : [];
+
 
     const addProject = (project) => {
         projects.push(project);
         saveProjectToDatabase();
     };
 
-    const initializeDefaultProj = () => {
+    function initializeDefaultProj() {
         const defaultProj = createProject();
-        defaultProj.getActive() ? false : defaultProj.switchActive();
-        addProject(defaultProj);
+        saveProjectToDatabase();
     };
 
     const getAllProjects = () => {
@@ -39,6 +39,6 @@ export function allProjects() {
         return localStorage.getItem("projects");
     };
 
-    return { addProject, getAllProjects, getConvertedProjectsFromDB, initializeDefaultProj }
+    return { addProject, getAllProjects }
 }
 

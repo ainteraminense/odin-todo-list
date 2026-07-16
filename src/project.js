@@ -10,9 +10,9 @@ export function createProject(name = "My Project") {
     }
     const isActive = false;
 
-    const getActive = () => isActive;
+    //const getActive = () => isActive;
 
-    const switchActive = () => isActive ? true : false;
+    //const switchActive = () => isActive = isActive ? true : false;
 
-    return { name, getId, getToDos, addToDo, switchActive, getActive }
+    return { name, getId, getToDos, addToDo }
 }
