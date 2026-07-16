@@ -5,7 +5,7 @@ import { home } from "./homePage.js";
 const homePage = home();
 homePage.createHomePageTopSection(); 
 homePage.refreshProjects();
-//homePage.showDetails();
+homePage.showDetails();
 
 // Refresh projects when project is added
 

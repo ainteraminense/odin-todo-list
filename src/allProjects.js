@@ -9,14 +9,23 @@ export function allProjects() {
         saveProjectToDatabase();
     };
 
-    function initializeDefaultProj() {
+    const initializeDefaultProj = () => {
         const defaultProj = createProject();
+        projects.push(defaultProj);
         saveProjectToDatabase();
     };
 
     const getAllProjects = () => {
         return projects;
     }
+
+    const deActivateProjects = () => {
+        for (let i = 0; i < projects.length; i++) {
+            if (projects[i].isActive === true) {
+                projects[i].isActive = false;
+            }
+        }
+    };
 
     function getConvertedProjectsFromDB() {
         const convertedProjects = [];
@@ -39,6 +48,6 @@ export function allProjects() {
         return localStorage.getItem("projects");
     };
 
-    return { addProject, getAllProjects }
+    return { addProject, initializeDefaultProj, getAllProjects, deActivateProjects }
 }
 

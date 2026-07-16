@@ -10,7 +10,7 @@ export function home() {
     
     // Initialize default proj
     const projectsFactory = allProjects();
-    if(projectsFactory.getAllProjects() == null) {
+    if(projectsFactory.getAllProjects().length == 0) {
         projectsFactory.initializeDefaultProj();
     }
     const projects = projectsFactory.getAllProjects();

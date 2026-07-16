@@ -1,4 +1,4 @@
-export function createProject(name = "My Project") {
+export function createProject(name = "My Project", isActive = true) {
     const id = self.crypto.randomUUID();
     const toDoList = [];
 
@@ -8,11 +8,6 @@ export function createProject(name = "My Project") {
     const addToDo= (toDo) => {
         toDoList.push(toDo);
     }
-    const isActive = false;
 
-    //const getActive = () => isActive;
-
-    //const switchActive = () => isActive = isActive ? true : false;
-
-    return { name, getId, getToDos, addToDo }
+    return { name, isActive, getId, getToDos, addToDo}
 }

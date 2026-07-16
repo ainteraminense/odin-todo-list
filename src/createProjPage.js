@@ -33,8 +33,10 @@ export function openCreateNewProj(name) {
     addBtn.addEventListener("click", (event) => {
         console.log("New project added");
         const newProj = createProject(nameInput.value);
-        console.log(newProj.name);
+        console.log("Deactivating previous...")
+        projectsFactory.deActivateProjects();
         projectsFactory.addProject(newProj);
+        //console.log(projectsFactory);
         dialog.close();
         window.location.reload();
         event.preventDefault();
