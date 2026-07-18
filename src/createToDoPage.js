@@ -21,7 +21,27 @@ export function openCreateNewToDo(name) {
     titleInput.setAttribute("id", "title");
     titleInput.setAttribute("type", "text");
     titleInput.setAttribute("name", "title");
-    
+    const descriptionLabel = document.createElement("label");
+    descriptionLabel.setAttribute("for", "description");
+    const descriptionLabelText = document.createTextNode("Description");
+    descriptionLabel.appendChild(descriptionLabelText); 
+    const description = document.createElement("textarea");
+    description.setAttribute("id", "description");
+    const dueDateLabel = document.createElement("label");
+    dueDateLabel.setAttribute("for", "dueDate");
+    const dueDateLabelText = document.createTextNode("Due Date");
+    dueDateLabel.appendChild(dueDateLabelText);
+    const dueDate = document.createElement("input");
+    dueDate.setAttribute("type", "date");
+    dueDate.setAttribute("id", "dueDate");
+    const formRow1 = document.createElement("div");
+    formRow1.classList.add("form-row");
+    const formRow2 = document.createElement("div");
+    formRow2.classList.add("form-row");
+    const formRow3 = document.createElement("div");
+    formRow3.classList.add("form-row");
+    const formButtonsRow = document.createElement("div");
+    formButtonsRow.classList.add("form-btn-row");
     // Form buttons
     const closeBtn = document.createElement("button");
     closeBtn.setAttribute("commandfor", "ToDo-dialog");
@@ -44,10 +64,17 @@ export function openCreateNewToDo(name) {
     event.preventDefault();
     });
     form.appendChild(h2);
-    form.appendChild(titleLabel);
-    form.appendChild(titleInput);
-    form.appendChild(closeBtn);
-    form.appendChild(addBtn);
+    formRow1.appendChild(titleLabel);
+    formRow1.appendChild(titleInput);
+    form.appendChild(formRow1);
+    formRow2.appendChild(descriptionLabel);
+    formRow2.appendChild(description);
+    form.appendChild(formRow2);
+    formRow3.appendChild(dueDateLabel);
+    formRow3.appendChild(dueDate);
+    form.appendChild(formRow3);
+    formButtonsRow.appendChild(addBtn);
+    form.appendChild(formButtonsRow);
     dialog.appendChild(form);
     dialog.appendChild(closeBtn);
 
