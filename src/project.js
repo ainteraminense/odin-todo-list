@@ -2,7 +2,7 @@ import { createToDoItem } from "./todo-item.js";
 
 export function createProject(name = "My Project", isActive = true, projectId = self.crypto.randomUUID()) {
     const toDoList = getToDoFromDB() ? getConvertedToDosFromDB() : [];
-    const getToDos = () => toDoList.forEach((todo) => console.log(todo));
+    const getToDos = () => toDoList;
 
     const addToDo = (toDo) => {
         toDoList.push(toDo);

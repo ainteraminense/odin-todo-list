@@ -83,7 +83,7 @@ export function openCreateNewToDo(name) {
     currentProject.addToDo(toDo);
     console.log("New ToDo added");
     dialog.close();
-    // window.location.reload();
+    window.location.reload();
     event.preventDefault();
     });
     form.appendChild(h2);

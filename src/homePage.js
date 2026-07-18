@@ -89,13 +89,36 @@ export function home() {
         addToDoBtn.setAttribute("command", "show-modal");
         addToDoBtn.setAttribute("commandfor", "ToDo-dialog");
         addToDoBtn.addEventListener("click", openCreateNewToDo);
-        
-        // const tr = document.createElement("tr");
-        // const thName = document.createElement("th");
-        // thName.setAttribute("scope", "row");
-        
-
         asideTable.appendChild(tableCaption);
+        const trHead = document.createElement("tr");
+        const thName = document.createElement("th");
+        thName.setAttribute("scope", "col");
+        const thNameText = document.createTextNode("Title");
+        thName.appendChild(thNameText);
+        const thDueDate = document.createElement("th");
+        thDueDate.setAttribute("scope", "col");
+        const thDueDateText = document.createTextNode("Due Date");
+        thDueDate.appendChild(thDueDateText);
+        trHead.appendChild(thName);
+        trHead.appendChild(thDueDate);
+        asideTable.appendChild(trHead);
+
+        const ToDos = activeProject.getToDos();
+        ToDos.forEach((ToDo) => {
+        const trRow = document.createElement("tr");
+        const tdName = document.createElement("td");
+        const tdNameText = document.createTextNode(ToDo.title);
+        tdName.appendChild(tdNameText);
+        trRow.appendChild(tdName);
+        
+        
+        const tdDueDate = document.createElement("td");
+        const tdDueDateText = document.createTextNode(ToDo.dueDate);
+        tdDueDate.appendChild(tdDueDateText);
+        trRow.appendChild(tdDueDate);
+        asideTable.appendChild(trRow);
+        })
+        
         containerDetails.appendChild(addToDoBtn);
         containerDetails.appendChild(asideTable);
 
