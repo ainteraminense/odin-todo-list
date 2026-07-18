@@ -14,7 +14,7 @@ export function openCreateNewToDo(name) {
     const h2Text = document.createTextNode("Add a New ToDo");
     h2.appendChild(h2Text);
     const titleLabel = document.createElement("label");
-    const labelText = document.createTextNode("ToDo Title");
+    const labelText = document.createTextNode("ToDo Title:");
     titleLabel.appendChild(labelText);
     titleLabel.setAttribute("for", "title");
     const titleInput = document.createElement("input");
@@ -23,23 +23,45 @@ export function openCreateNewToDo(name) {
     titleInput.setAttribute("name", "title");
     const descriptionLabel = document.createElement("label");
     descriptionLabel.setAttribute("for", "description");
-    const descriptionLabelText = document.createTextNode("Description");
+    const descriptionLabelText = document.createTextNode("Description:");
     descriptionLabel.appendChild(descriptionLabelText); 
     const description = document.createElement("textarea");
     description.setAttribute("id", "description");
     const dueDateLabel = document.createElement("label");
     dueDateLabel.setAttribute("for", "dueDate");
-    const dueDateLabelText = document.createTextNode("Due Date");
+    const dueDateLabelText = document.createTextNode("Due Date:");
     dueDateLabel.appendChild(dueDateLabelText);
     const dueDate = document.createElement("input");
     dueDate.setAttribute("type", "date");
     dueDate.setAttribute("id", "dueDate");
+    const priorityLabel = document.createElement("label");
+    const priorityLabelText = document.createTextNode("Priority:");
+    const prioritySelect = document.createElement("select");
+    prioritySelect.setAttribute("id", "priority");
+    const priorityOption1 = document.createElement("option");
+    const priorityOption1Text = document.createTextNode("Low");
+    priorityOption1.setAttribute("value", "low");
+    const priorityOption2 = document.createElement("option");
+    const priorityOption2Text = document.createTextNode("Medium");
+    priorityOption2.setAttribute("value", "medium");
+    const priorityOption3 = document.createElement("option");
+    const priorityOption3Text = document.createTextNode("High");
+    priorityOption3.setAttribute("value", "high");
+    priorityLabel.appendChild(priorityLabelText);
+    priorityOption1.appendChild(priorityOption1Text);
+    priorityOption2.appendChild(priorityOption2Text);
+    priorityOption3.appendChild(priorityOption3Text);
+    prioritySelect.appendChild(priorityOption1);
+    prioritySelect.appendChild(priorityOption2);
+    prioritySelect.appendChild(priorityOption3);
     const formRow1 = document.createElement("div");
     formRow1.classList.add("form-row");
     const formRow2 = document.createElement("div");
     formRow2.classList.add("form-row");
     const formRow3 = document.createElement("div");
     formRow3.classList.add("form-row");
+    const formRow4 = document.createElement("div");
+    formRow4.classList.add("form-row");
     const formButtonsRow = document.createElement("div");
     formButtonsRow.classList.add("form-btn-row");
     // Form buttons
@@ -55,7 +77,7 @@ export function openCreateNewToDo(name) {
     const currentProject = projectsFactory.getCurrentProject();
     //title, description, dueDate, priority
     addBtn.addEventListener("click", (event) => {
-    const toDo = createToDoItem(titleInput.value, "", new Date(26, 5, 24), "low", currentProject.projectId);
+    const toDo = createToDoItem(titleInput.value, description.value, dueDate.value, "low", currentProject.projectId);
     console.log(toDo);
     currentProject.addToDo(toDo);
     console.log("New ToDo added");
@@ -73,6 +95,9 @@ export function openCreateNewToDo(name) {
     formRow3.appendChild(dueDateLabel);
     formRow3.appendChild(dueDate);
     form.appendChild(formRow3);
+    formRow4.appendChild(priorityLabel);
+    formRow4.appendChild(prioritySelect);
+    form.appendChild(formRow4);
     formButtonsRow.appendChild(addBtn);
     form.appendChild(formButtonsRow);
     dialog.appendChild(form);
