@@ -14,7 +14,6 @@ export function home() {
         projectsFactory.initializeDefaultProj();
     }
     const projects = projectsFactory.getAllProjects();
-    console.log(projects);
 
     const createHomePageTopSection = () => {
         // Getting top part of page
@@ -75,6 +74,7 @@ export function home() {
 
     const showDetails = () => {
         activeProject = projectsFactory.getCurrentProject();
+        console.log(`Project id is ${activeProject.projectId}`);
         const tdName = activeProject;
         const asideTable = document.createElement("table");
         asideTable.classList.add("aside-table");
@@ -89,7 +89,7 @@ export function home() {
         addToDoBtn.setAttribute("command", "show-modal");
         addToDoBtn.setAttribute("commandfor", "ToDo-dialog");
         addToDoBtn.addEventListener("click", openCreateNewToDo);
-        console.log(`ToDos are ${activeProject.getToDos()}`);
+        
         // const tr = document.createElement("tr");
         // const thName = document.createElement("th");
         // thName.setAttribute("scope", "row");

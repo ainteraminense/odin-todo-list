@@ -37,14 +37,12 @@ export function allProjects() {
 
     function getConvertedProjectsFromDB() {
         const convertedProjects = [];
-        for (let i = 0;i<localStorage.length;i++) {
-            let key = localStorage.key(i);
-            const unconvertedProjects = JSON.parse(localStorage.getItem(key));
-            unconvertedProjects.forEach(unconvertedProject => {
-                const convertedProject = createProject(unconvertedProject.name, unconvertedProject.isActive);
-                convertedProjects.push(convertedProject);
-            });
-        }
+        let key = localStorage.key(0);
+        const unconvertedProjects = JSON.parse(localStorage.getItem(key));
+        unconvertedProjects.forEach(unconvertedProject => {
+            const convertedProject = createProject(unconvertedProject.name, unconvertedProject.isActive, unconvertedProject.projectId);
+            convertedProjects.push(convertedProject);
+        });
         return convertedProjects;
     };
 

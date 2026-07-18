@@ -75,6 +75,7 @@ export function openCreateNewToDo(name) {
     addBtn.appendChild(addBtnText);
     const projectsFactory = allProjects();
     const currentProject = projectsFactory.getCurrentProject();
+    console.log(`current project is ${currentProject.projectId}`);
     //title, description, dueDate, priority
     addBtn.addEventListener("click", (event) => {
     const toDo = createToDoItem(titleInput.value, description.value, dueDate.value, "low", currentProject.projectId);

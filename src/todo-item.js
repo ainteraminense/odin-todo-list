@@ -1,4 +1,4 @@
-export function createToDoItem(title, description, dueDate, priority, notes = "", projectId) {
+export function createToDoItem(title, description, dueDate, priority, projectId, notes = "") {
     
     const toDoId = self.crypto.randomUUID();
 
@@ -7,5 +7,5 @@ export function createToDoItem(title, description, dueDate, priority, notes = ""
     const changeStatus = () => isDone = isDone === false ? true : false; 
 
 
-    return { title, description, dueDate, priority, getStatus, changeStatus, toDoId }
+    return { title, description, dueDate, priority, getStatus, changeStatus, toDoId, projectId }
 }
