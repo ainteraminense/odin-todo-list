@@ -19,6 +19,16 @@ export function allProjects() {
         return projects;
     }
 
+    const makeActive = (projectId) => {
+        // change active project in the todo list
+        for (let i = 0; i < projects.length; i++) {
+            if (projects[i].projectId === projectId) {
+                projects[i].isActive = true;
+            }
+        }
+        saveProjectToDatabase();
+    }
+
     const deActivateProjects = () => {
         for (let i = 0; i < projects.length; i++) {
             if (projects[i].isActive === true) {
@@ -54,6 +64,6 @@ export function allProjects() {
         return localStorage.getItem("projects");
     };
 
-    return { addProject, initializeDefaultProj, getAllProjects, deActivateProjects,getCurrentProject }
+    return { addProject, initializeDefaultProj, getAllProjects, deActivateProjects,getCurrentProject, makeActive }
 }
 

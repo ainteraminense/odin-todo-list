@@ -53,6 +53,11 @@ export function home() {
 
             tdName.appendChild(projName);
             const btnView = document.createElement("button");
+            btnView.addEventListener("click", () => {
+                projectsFactory.deActivateProjects();
+                projectsFactory.makeActive(proj.projectId);
+                window.location.reload();
+            });
             const btnText = document.createTextNode("View")
             btnView.appendChild(btnText);
             // head
@@ -104,16 +109,17 @@ export function home() {
         asideTable.appendChild(trHead);
 
         const ToDos = activeProject.getToDos();
-        ToDos.forEach((ToDo) => {
+        ToDos.forEach((toDo) => {
+        if (toDo.projectId != activeProject.projectId) return;
         const trRow = document.createElement("tr");
         const tdName = document.createElement("td");
-        const tdNameText = document.createTextNode(ToDo.title);
+        const tdNameText = document.createTextNode(toDo.title);
         tdName.appendChild(tdNameText);
         trRow.appendChild(tdName);
         
         
         const tdDueDate = document.createElement("td");
-        const tdDueDateText = document.createTextNode(ToDo.dueDate);
+        const tdDueDateText = document.createTextNode(toDo.dueDate);
         tdDueDate.appendChild(tdDueDateText);
         trRow.appendChild(tdDueDate);
         asideTable.appendChild(trRow);
