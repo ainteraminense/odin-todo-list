@@ -3,135 +3,133 @@ import { openCreateNewProj } from "./createProjPage.js";
 import { openCreateNewToDo } from "./createToDoPage.js";
 
 export function home() {
-    let activeProject = null;
-    const main = document.querySelector("#main");
-    const containerChild = document.createElement("div");
-    containerChild.classList.add("container-child");
-    
-    // Initialize default proj
-    const projectsFactory = allProjects();
-    if(projectsFactory.getAllProjects().length == 0) {
-        projectsFactory.initializeDefaultProj();
-    }
-    const projects = projectsFactory.getAllProjects();
+  let activeProject = null;
+  const main = document.querySelector("#main");
+  const containerChild = document.createElement("div");
+  containerChild.classList.add("container-child");
 
-    const createHomePageTopSection = () => {
-        // Getting top part of page
-        const h1 = document.createElement("h1");
-        h1.textContent = "View All Projects";
-        const addProjBtn = document.createElement("button");
-        addProjBtn.textContent = "Create Project";
-        addProjBtn.setAttribute("command", "show-modal");
-        addProjBtn.setAttribute("commandfor", "my-dialog");
-        addProjBtn.addEventListener("click", openCreateNewProj);
+  // Initialize default proj
+  const projectsFactory = allProjects();
+  if (projectsFactory.getAllProjects().length == 0) {
+    projectsFactory.initializeDefaultProj();
+  }
+  const projects = projectsFactory.getAllProjects();
 
-        const projContainer = document.createElement("div");
-        projContainer.classList.add("container");
+  const createHomePageTopSection = () => {
+    // Getting top part of page
+    const h1 = document.createElement("h1");
+    h1.textContent = "View All Projects";
+    const addProjBtn = document.createElement("button");
+    addProjBtn.textContent = "Create Project";
+    addProjBtn.setAttribute("command", "show-modal");
+    addProjBtn.setAttribute("commandfor", "my-dialog");
+    addProjBtn.addEventListener("click", openCreateNewProj);
 
-        projContainer.appendChild(h1);
-        projContainer.appendChild(addProjBtn);
-        main.appendChild(projContainer);
-    }
+    const projContainer = document.createElement("div");
+    projContainer.classList.add("container");
 
+    projContainer.appendChild(h1);
+    projContainer.appendChild(addProjBtn);
+    main.appendChild(projContainer);
+  };
 
-    const refreshProjects = () => {
+  const refreshProjects = () => {
+    const table = document.createElement("table");
+    const thead = document.createElement("thead");
+    const tr = document.createElement("tr");
+    const thName = document.createElement("th");
+    thName.setAttribute("scope", "col");
+    const thEmpty = document.createElement("th");
+    thEmpty.setAttribute("scope", "col");
+    thName.textContent += "Project Name";
+    const tbody = document.createElement("tbody");
+    // Render the projects
+    projects.forEach((proj) => {
+      const trBody = document.createElement("tr");
+      const tdName = document.createElement("td");
+      const projName = document.createTextNode(proj.name);
 
-        const table = document.createElement("table");
-        const thead = document.createElement("thead");
-        const tr = document.createElement("tr");
-        const thName = document.createElement("th");
-        thName.setAttribute("scope", "col");
-        const thEmpty = document.createElement("th");
-        thEmpty.setAttribute("scope", "col");
-        thName.textContent += "Project Name";
-        const tbody = document.createElement("tbody");
-        // Render the projects
-        projects.forEach((proj) => {
-            const trBody = document.createElement("tr");
-            const tdName = document.createElement("td");
-            const projName = document.createTextNode(proj.name)
+      tdName.appendChild(projName);
+      const btnView = document.createElement("button");
+      btnView.addEventListener("click", () => {
+        projectsFactory.deActivateProjects();
+        projectsFactory.makeActive(proj.projectId);
+        window.location.reload();
+      });
+      const btnText = document.createTextNode("View");
+      btnView.appendChild(btnText);
+      // head
+      tr.appendChild(thName);
+      tr.appendChild(thEmpty);
+      thead.appendChild(tr);
+      // body
+      trBody.appendChild(tdName);
+      trBody.appendChild(btnView);
+      tbody.appendChild(trBody);
+    });
+    // table
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    containerChild.appendChild(table);
+    main.appendChild(containerChild);
+  };
 
-            tdName.appendChild(projName);
-            const btnView = document.createElement("button");
-            btnView.addEventListener("click", () => {
-                projectsFactory.deActivateProjects();
-                projectsFactory.makeActive(proj.projectId);
-                window.location.reload();
-            });
-            const btnText = document.createTextNode("View")
-            btnView.appendChild(btnText);
-            // head
-            tr.appendChild(thName);
-            tr.appendChild(thEmpty);
-            thead.appendChild(tr);
-            // body
-            trBody.appendChild(tdName);
-            trBody.appendChild(btnView);
-            tbody.appendChild(trBody);
-        });
-        // table
-            table.appendChild(thead);
-            table.appendChild(tbody);
-            containerChild.appendChild(table);
-            main.appendChild(containerChild);
-            
-    }
+  const showDetails = () => {
+    activeProject = projectsFactory.getCurrentProject();
+    console.log(`Project id is ${activeProject.projectId}`);
+    // const tdName = activeProject;
+    const asideTable = document.createElement("table");
+    asideTable.classList.add("aside-table");
+    const tableCaption = document.createElement("legend");
+    const tableCaptionText = document.createTextNode(
+      `All ToDos for ${activeProject.name}`,
+    );
+    tableCaption.appendChild(tableCaptionText);
 
-    const showDetails = () => {
-        activeProject = projectsFactory.getCurrentProject();
-        console.log(`Project id is ${activeProject.projectId}`);
-        const tdName = activeProject;
-        const asideTable = document.createElement("table");
-        asideTable.classList.add("aside-table");
-        const tableCaption = document.createElement("legend");
-        const tableCaptionText = document.createTextNode(`All ToDos for ${activeProject.name}`);
-        tableCaption.appendChild(tableCaptionText);
+    const containerDetails = document.createElement("div");
+    const addToDoBtn = document.createElement("button");
+    const addToDoBtnText = document.createTextNode("Add ToDo");
+    addToDoBtn.appendChild(addToDoBtnText);
+    addToDoBtn.setAttribute("command", "show-modal");
+    addToDoBtn.setAttribute("commandfor", "ToDo-dialog");
+    addToDoBtn.addEventListener("click", openCreateNewToDo);
+    asideTable.appendChild(tableCaption);
+    const trHead = document.createElement("tr");
+    const thName = document.createElement("th");
+    thName.setAttribute("scope", "col");
+    const thNameText = document.createTextNode("Title");
+    thName.appendChild(thNameText);
+    const thDueDate = document.createElement("th");
+    thDueDate.setAttribute("scope", "col");
+    const thDueDateText = document.createTextNode("Due Date");
+    thDueDate.appendChild(thDueDateText);
+    trHead.appendChild(thName);
+    trHead.appendChild(thDueDate);
+    asideTable.appendChild(trHead);
 
-        const containerDetails = document.createElement("div");
-        const addToDoBtn = document.createElement("button");
-        const addToDoBtnText = document.createTextNode("Add ToDo");
-        addToDoBtn.appendChild(addToDoBtnText);
-        addToDoBtn.setAttribute("command", "show-modal");
-        addToDoBtn.setAttribute("commandfor", "ToDo-dialog");
-        addToDoBtn.addEventListener("click", openCreateNewToDo);
-        asideTable.appendChild(tableCaption);
-        const trHead = document.createElement("tr");
-        const thName = document.createElement("th");
-        thName.setAttribute("scope", "col");
-        const thNameText = document.createTextNode("Title");
-        thName.appendChild(thNameText);
-        const thDueDate = document.createElement("th");
-        thDueDate.setAttribute("scope", "col");
-        const thDueDateText = document.createTextNode("Due Date");
-        thDueDate.appendChild(thDueDateText);
-        trHead.appendChild(thName);
-        trHead.appendChild(thDueDate);
-        asideTable.appendChild(trHead);
+    const ToDos = activeProject.getToDos();
+    ToDos.forEach((toDo) => {
+      if (toDo.projectId != activeProject.projectId) return;
+      const trRow = document.createElement("tr");
+      const tdName = document.createElement("td");
+      const tdNameText = document.createTextNode(toDo.title);
+      tdName.appendChild(tdNameText);
+      trRow.appendChild(tdName);
 
-        const ToDos = activeProject.getToDos();
-        ToDos.forEach((toDo) => {
-        if (toDo.projectId != activeProject.projectId) return;
-        const trRow = document.createElement("tr");
-        const tdName = document.createElement("td");
-        const tdNameText = document.createTextNode(toDo.title);
-        tdName.appendChild(tdNameText);
-        trRow.appendChild(tdName);
-        
-        
-        const tdDueDate = document.createElement("td");
-        const tdDueDateText = document.createTextNode(toDo.dueDate);
-        tdDueDate.appendChild(tdDueDateText);
-        trRow.appendChild(tdDueDate);
-        asideTable.appendChild(trRow);
-        })
-        
-        containerDetails.appendChild(addToDoBtn);
-        containerDetails.appendChild(asideTable);
+      const tdDueDate = document.createElement("td");
+      const tdDueDateText = document.createTextNode(toDo.dueDate);
+      tdDueDate.appendChild(tdDueDateText);
+      trRow.appendChild(tdDueDate);
+      asideTable.appendChild(trRow);
+    });
 
-        containerChild.appendChild(containerDetails);
+    containerDetails.appendChild(addToDoBtn);
+    containerDetails.appendChild(asideTable);
 
-        main.appendChild(containerChild);
-    }
+    containerChild.appendChild(containerDetails);
 
-    return { createHomePageTopSection, refreshProjects, showDetails}
+    main.appendChild(containerChild);
+  };
+
+  return { createHomePageTopSection, refreshProjects, showDetails };
 }

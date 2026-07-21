@@ -1,26 +1,26 @@
 body {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: #ffe4c4;
+  font-family: "Courier New", Courier, monospace;
+  background-color: #ffe4c4;
 }
 
 #main {
-    background-color: #faebd7;
-    width: 80vw;
-    margin: 0 auto;
+  background-color: #faebd7;
+  width: 80vw;
+  margin: 0 auto;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: 7fr 1fr;
+  display: grid;
+  grid-template-columns: 7fr 1fr;
 }
 
 .container h1,
 .container > button {
-    padding: 16px;
-    margin: 16px;
+  padding: 16px;
+  margin: 16px;
 }
 
 .container-child {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
